@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Clicker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="game-container">
+    <img src="assets/title.png">
+    <div
+      style="border: 3px solid #1003f8; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; width: 150px; padding: 5px; position: absolute; top: 10px; right: 10px;">
+      <img src="assets/pokeball.png" style="width: 20px; height: 20px;">
+      <span id="score" style="font-weight: bold;">0</span>
+    </div>
+    <div id="pokeball-container">
+      <div class="pokemon-images">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="pokemon dark"
+          id="pokemon1">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="pokemon dark"
+          id="pokemon2">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="pokemon dark"
+          id="pokemon3">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" class="pokemon dark"
+          id="pokemon4">
+      </div>
+      <div class="pokeball" id="pokeball"></div>
+    </div>
+    <div id="shop">
+      <h2>Tienda</h2>
+      <button id="upgrade-click">Mejorar clic (+1 punto por clic) - 10 puntos</button>
+      <button id="auto-points">Generar puntos pasivos (1 punto/seg) - 50 puntos</button>
+    </div>
+  </div>
+  <div id="menu" class="menu">
+    <button id="closeButton" class="close-button">Cerrar</button>
+    <ul id="attack-list">
+
+    </ul>
+  </div>
+  <button id="menuButton" class="menu-button">Mejoras Disponibles</button>
+  <script src="script.js"></script>
+</body>
+
+</html>

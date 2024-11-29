@@ -1,0 +1,207 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Evita el desplazamiento */
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #333;
+    height: 100vh;
+    margin: 0;
+    background-image: url('assets/fondo.png');
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center;
+}
+
+.game-container {
+    margin-top: 50px;
+}
+
+#pokeball-container {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+
+
+
+    position: relative;
+    height: 30vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+
+.pokemon-images {
+    position: absolute;
+    top: 10px; /* Ajusta según sea necesario */
+    left: 10px; /* Mantén las imágenes en la parte superior izquierda */
+    display: flex;
+    gap: 10px; /* Espaciado entre las imágenes */
+}
+
+
+.pokeball.spin {
+    animation: spin 0.3s linear;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(-20deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#shop {
+    margin-top: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #ffcc00;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffaa00;
+}
+
+
+.pokeball {
+    min-height: 25vh;
+    /* Tamaño reducido */
+    min-width: 13vw;
+    /* Tamaño reducido */
+    border-radius: 50%;
+    border: 2.75vmin solid black;
+    background-image:
+        radial-gradient(white 20%, white 20%, black 20%, black 30%, transparent 30%, transparent), linear-gradient(red 46%, black 46%, black 54%, white 54%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+
+
+}
+
+
+.pokemon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    opacity: 0.3; /* Imagen oscura */
+    transition: opacity 0.3s ease;
+}
+
+.pokemon.light {
+    opacity: 1; /* Imagen clara */
+}
+
+
+
+
+.menu {
+    position: fixed;
+    bottom: -250px; /* Oculto inicialmente */
+    left: 20px; /* Desplazado desde la izquierda */
+    width: 300px; /* Ancho limitado */
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 10px 10px 0 0; /* Bordes redondeados arriba */
+    padding: 10px 0;
+    transition: bottom 0.3s ease; /* Animación */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Aseguramos que esté detrás del botón */
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Habilita el scroll vertical */
+}
+.menu ul::-webkit-scrollbar {
+    width: 8px; /* Ancho del scroll */
+}
+
+.menu ul::-webkit-scrollbar-thumb {
+    background-color: #555; /* Color de la barra */
+    border-radius: 4px;
+}
+.menu ul::-webkit-scrollbar-track {
+    background-color: #222; /* Fondo del scroll */
+}
+
+.menu li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+}
+
+.menu li:last-child {
+    border-bottom: none;
+}
+
+.menu-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Botón en la esquina inferior izquierda */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 120px;
+    height: 50px;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+
+    text-align: center; /* Centrar el texto */
+    padding: 10px 0; /* Espaciado interno */
+    z-index: 2; /* Aseguramos que esté sobre el menú */
+}
+
+.menu-button:hover {
+    background-color: #0056b3;
+}
+
+
+.close-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none; /* Oculta elementos */
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú desplegable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu {
+            position: fixed;
+            bottom: -200px; /* Oculto inicialmente */
+            left: 20px; /* Desplazado desde la izquierda */
+            width: 300px; /* Ancho limitado */
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0; /* Bordes redondeados arriba */
+            padding: 20px 0;
+            transition: bottom 0.3s ease; /* Animación */
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+        }
+
+        .menu li:last-child {
+            border-bottom: none;
+        }
+
+        .menu-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px; /* Botón en la esquina inferior izquierda */
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu" class="menu">
+        <ul>
+            <li>Opción 1</li>
+            <li>Opción 2</li>
+            <li>Opción 3</li>
+            <li>Opción 4</li>
+        </ul>
+    </div>
+    <button id="menuButton" class="menu-button">☰</button>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const menuButton = document.getElementById('menuButton');
+
+        menuButton.addEventListener('click', () => {
+            if (menu.style.bottom === '0px') {
+                menu.style.bottom = '-200px'; // Ocultar el menú
+            } else {
+                menu.style.bottom = '0px'; // Mostrar el menú
+            }
+        });
+    </script>
+</body>
+</html>
