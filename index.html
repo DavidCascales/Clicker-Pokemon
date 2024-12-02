@@ -14,20 +14,35 @@
     <div
       style="border: 3px solid #1003f8; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; width: 150px; padding: 5px; position: absolute; top: 10px; right: 10px;">
       <img src="assets/pokeball.png" style="width: 20px; height: 20px;">
+
       <span id="score" style="font-weight: bold;">0</span>
     </div>
+
     <div id="pokeball-container">
-      <div class="pokemon-images">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="pokemon dark"
-          id="pokemon1">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="pokemon dark"
-          id="pokemon2">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="pokemon dark"
-          id="pokemon3">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" class="pokemon dark"
-          id="pokemon4">
+      <!-- Botón para mostrar/ocultar la colección -->
+      <button id="toggle-collection-button">Mostrar Colección</button>
+      
+      <div class="pokemon-collection" id="pokemon-collection">
+        <!-- Botón para cerrar la colección -->
+        <button id="close-collection-button" class="close-btn">X</button>
+        <div class="collection-title">Colección</div>
+        <div class="pokemon-images">
+
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="pokemon dark"
+            id="pokemon1">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="pokemon dark"
+            id="pokemon2">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="pokemon dark"
+            id="pokemon3">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+            class="pokemon dark" id="pokemon4">
+
+            
+            
+        </div>
       </div>
       <div class="pokeball" id="pokeball"></div>
+      <div id="attack-animation-container"></div>
     </div>
     <div id="shop">
       <h2>Tienda</h2>
@@ -41,7 +56,7 @@
 
     </ul>
   </div>
-  <button id="menuButton" class="menu-button">Mejoras Adquiridas</button>
+  <button id="menuButton" class="menu-button">Ataques Desbloqueados</button>
   <!-- Contenedor de mensajes -->
   <div id="contenedor-mensajes"></div>
 
@@ -56,9 +71,9 @@
   <div id="shop">
     <h2>Evoluciones</h2>
     <div id="evolution-shop">
-        <!-- Botones de evolución se generarán dinámicamente -->
+      <!-- Botones de evolución se generarán dinámicamente -->
     </div>
-</div>
+  </div>
   <script src="script.js"></script>
 </body>
 

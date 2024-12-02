@@ -40,7 +40,7 @@ const logros = [
   /*(arreglar)mirar este logro*/{ id: 8, title: "Cazador de Tesoros", description: "Desbloquea todos los ataques.", condition: (score) => ivysaurUnlocked && venusaurUnlocked && charmeleonUnlocked && charizardUnlocked && wartortleUnlocked && blastoiseUnlocked, achieved: false },
   { id: 9, title: "Golpe Crítico", description: "Realiza un golpe crítico.", condition: (score) => Math.random() < criticalChance, achieved: false },
   { id: 10, title: "Cazador de Logros", description: "Desbloquea todos los logros.", condition: (score) => logros.every(logro => logro.achieved), achieved: false },
-  { id: 11, title: "Evolucionador", description: "Evoluciona a todos los Pokémon.", condition: (score) => ivysaurUnlocked && venusaurUnlocked && charmeleonUnlocked && charizardUnlocked && wartortleUnlocked && blastoiseUnlocked, achieved: false },  
+  { id: 11, title: "Evolucionador", description: "Evoluciona a todos los Pokémon.", condition: (score) => ivysaurUnlocked && venusaurUnlocked && charmeleonUnlocked && charizardUnlocked && wartortleUnlocked && blastoiseUnlocked, achieved: false },
 ];
 
 
@@ -141,9 +141,80 @@ menuButton.addEventListener('click', () => {
 });
 // Ocultar el menú y volver a mostrar el botón inicial
 closeButton.addEventListener('click', () => {
-  menu.style.bottom = '-250px'; // Ocultar el menú
+  menu.style.bottom = '-300px'; // Ocultar el menú
   menuButton.classList.remove('hidden'); // Mostrar el botón inicial
 });
+
+// Obtener los elementos
+const botonColeccion = document.getElementById('toggle-collection-button');
+const pokemonCollection = document.getElementById('pokemon-collection');
+const closeColeccion = document.getElementById('close-collection-button');
+
+// Evento para mostrar la colección
+botonColeccion.addEventListener('click', () => {
+  // Ocultar el botón de mostrar colección
+  botonColeccion.style.display = 'none';
+
+  // Mover la colección a la vista (deslizar desde la izquierda)
+  pokemonCollection.style.left = '10px'; // Mover la colección a la posición visible
+});
+
+// Evento para cerrar la colección
+closeColeccion.addEventListener('click', () => {
+  // Mover la colección fuera de la pantalla hacia la izquierda
+  pokemonCollection.style.left = '-400px';
+
+  // Volver a mostrar el botón de mostrar colección
+  botonColeccion.style.display = 'block';
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Obtener todas las imágenes de Pokémon
+const pokemonImages = document.querySelectorAll('.pokemon-images img');
+
+// Evento para abrir la página del Pokémon si está desbloqueado
+pokemonImages.forEach(image => {
+  image.addEventListener('click', () => {
+    const pokemonId = image.id; // Obtener el id de la imagen
+    const isUnlocked = getPokemonUnlockStatus(pokemonId); // Verificar si está desbloqueado
+
+    if (isUnlocked) {
+      const imageUrl = image.src;
+      window.open("CartaIndv.html?imagen="+imageUrl, '_blank'); // Abre la imagen en una nueva pestaña
+    } else {
+      alert('Este Pokémon aún está bloqueado. ¡Desbloquéalo primero!');
+    }
+  });
+});
+
+// Función para obtener el estado de desbloqueo de un Pokémon
+function getPokemonUnlockStatus(pokemonId) {
+  if (pokemonId === 'pokemon1') return bulbasaurUnlocked;
+  if (pokemonId === 'pokemon2') return charmanderUnlocked;
+  if (pokemonId === 'pokemon3') return squirtleUnlocked;
+  if (pokemonId === 'pokemon4') return pikachuUnlocked;
+  return false;
+}
+
+
+
+
+
+
 
 
 
@@ -199,11 +270,6 @@ function displayAchievement(logro) {
 }
 
 
-
-
-
-
-
 // Comprar mejoras
 upgradeClickButton.addEventListener('click', () => {
   if (score >= 10) {
@@ -211,6 +277,7 @@ upgradeClickButton.addEventListener('click', () => {
     pointsPerClick += 1;
     updateScore();
     updateEvolutionShop();
+    mostrarMensaje('¡Has mejorado tu ataque! Ahora ganas 1 punto extra por clic.', 'green', 'white');
   } else {
     alert('¡No tienes suficientes puntos!');
   }
@@ -222,6 +289,7 @@ autoPointsButton.addEventListener('click', () => {
     autoPoints += 1;
     updateScore();
     updateEvolutionShop();
+    mostrarMensaje('¡Has comprado un ataque automático! Ahora ganas 1 punto por segundo.', 'green', 'white');
   } else {
     alert('¡No tienes suficientes puntos!');
   }
@@ -240,31 +308,130 @@ setInterval(() => {
 }, 1000);
 
 
-
+const attackCooldowns = {};
 
 // Función para añadir un ataque al menú
 function addAttack(pokemon) {
-  if (pokemonAttacks[pokemon]) {
-    // Crear un nuevo elemento <li> con el ataque
-    const attackItem = document.createElement('li');
-    attackItem.textContent = `${pokemon}: ${pokemonAttacks[pokemon].attack}`;
 
-    // Añadir el ataque a la lista
-    attackList.appendChild(attackItem);
+  if (pokemonAttacks[pokemon]) {
+
+
+    // // Crear un nuevo elemento <li> con el ataque
+    // const attackItem = document.createElement('li');
+    // attackItem.textContent = `${pokemon}: ${pokemonAttacks[pokemon].attack}`;
+
+    // // Añadir el ataque a la lista
+    // attackList.appendChild(attackItem);
 
 
     // Aplicar la mejora al puntaje
     const attackData = pokemonAttacks[pokemon];
-    if (attackData.type === 'click') {
-      score += attackData.points; // Incrementar los puntos por clic
-    } else if (attackData.type === 'auto') {
-      autoPoints += attackData.points; // Incrementar los puntos por segundo
-    }
+
+    // Crear un botón para el ataque
+    const attackButton = document.createElement('button');
+    attackButton.textContent = `${pokemon}: ${attackData.attack}`;
+    attackButton.classList.add('attack-button'); // Clase para estilos
+
+    // Agregar evento al botón
+    attackButton.addEventListener('click', () => {
+      if (attackCooldowns[pokemon]) {
+        mostrarMensaje(`${pokemon} está en cooldown. Espere ${attackCooldowns[pokemon]} segundos.`, "orange", "white");
+        return;
+      }
+      usarAtaque(pokemon, attackData); // Llamar a la función de ataque
+
+      // Establecer el cooldown de 10 segundos
+      attackCooldowns[pokemon] = 10;
+      actualizarBotonCooldown(attackButton, pokemon); // Actualizar el texto y estado del botón
+    });
+
+    // Añadir el botón al menú de ataques
+    attackList.appendChild(attackButton);
+
+
+    // if (attackData.type === 'click') {
+    //   score += attackData.points; // Incrementar los puntos por clic
+    // } else if (attackData.type === 'auto') {
+    //   autoPoints += attackData.points; // Incrementar los puntos por segundo
+    // }
+
   } else {
     console.log(`El Pokémon ${pokemon} no tiene un ataque registrado.`);
   }
   updateScore();
 }
+function actualizarBotonCooldown(button, pokemon) {
+  // Deshabilitar el botón y cambiar el texto
+  button.disabled = true;
+  button.textContent = `${pokemon}: ${attackCooldowns[pokemon]}s`;
+
+  // Actualizar cada segundo el tiempo restante del cooldown
+  const cooldownInterval = setInterval(() => {
+    attackCooldowns[pokemon]--;
+    button.textContent = `${pokemon}: ${attackCooldowns[pokemon]}s`;
+
+    // Si el cooldown llega a 0, habilitar el botón de nuevo
+    if (attackCooldowns[pokemon] <= 0) {
+      clearInterval(cooldownInterval);
+      attackCooldowns[pokemon] = 0;
+      button.disabled = false;
+      button.textContent = `${pokemon}: ${pokemonAttacks[pokemon].attack}`; // Volver al texto original
+    }
+  }, 1000);
+}
+
+function usarAtaque(pokemon, attackData) {
+  // Mostrar la animación del ataque
+  const attackContainer = document.getElementById('attack-animation-container');
+  const attackImage = document.createElement('img');
+  attackImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonId(pokemon)}.png`;
+  attackImage.classList.add('attack-image');
+
+  // Añadir la imagen al contenedor
+  attackContainer.appendChild(attackImage);
+
+  // Eliminar la imagen después de la animación
+  setTimeout(() => {
+    attackImage.remove();
+  }, 500); // Duración de la animación (coincide con la definida en CSS)
+
+
+  if (attackData.type === 'click') {
+    // Incrementar puntos según el ataque
+    score += attackData.points;
+    mostrarMensaje(`¡${pokemon} usó ${attackData.attack}! Ganas ${attackData.points} puntos.`, "green", "white");
+  } else if (attackData.type === 'auto') {
+    // Incrementar autoPoints por un tiempo limitado
+    const bonus = attackData.points;
+    autoPoints += bonus;
+    mostrarMensaje(`¡${pokemon} usó ${attackData.attack}! Ganas ${bonus} puntos/seg por 10 segundos.`, "blue", "white");
+
+    // Remover el efecto después de 10 segundos
+    setTimeout(() => {
+      autoPoints -= bonus;
+      mostrarMensaje(`El efecto de ${attackData.attack} de ${pokemon} ha terminado.`, "red", "white");
+    }, 10000); // Duración en milisegundos
+  }
+  updateScore();
+}
+
+// Función auxiliar para obtener el ID del Pokémon a partir del nombre
+function getPokemonId(pokemon) {
+  const pokemonIds = {
+    Bulbasaur: 1,
+    Ivysaur: 2,
+    Venusaur: 3,
+    Charmander: 4,
+    Charmeleon: 5,
+    Charizard: 6,
+    Squirtle: 7,
+    Wartortle: 8,
+    Blastoise: 9,
+    Pikachu: 25,
+  };
+  return pokemonIds[pokemon];
+}
+
 
 function mostrarMensaje(texto, color = "white", colorTexto = "white") {
   const contenedor = document.getElementById("contenedor-mensajes");
@@ -391,3 +558,4 @@ function evolveInShop(pokemonId, cost, index) {
     mostrarMensaje("No tienes suficientes puntos para evolucionar este Pokémon.", "red", "white");
   }
 }
+

@@ -1,8 +1,11 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
-    overflow: hidden; /* Evita el desplazamiento */
+    overflow: hidden;
+    /* Evita el desplazamiento */
 }
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -10,8 +13,10 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('assets/fondo.png');
-    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover;
+    /* Asegura que la imagen cubra toda la pantalla */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita */
     background-position: center;
 }
 
@@ -20,7 +25,7 @@ body {
 }
 
 #pokeball-container {
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,32 +34,118 @@ body {
 
 
     position: relative;
-    height: 30vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+    height: 30vh;
+    /* Asegura que el contenedor ocupe toda la altura de la pantalla */
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
 }
 
-
-.pokemon-images {
+/* Estilos del botón para mostrar la colección */
+#toggle-collection-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute; /* Hace que el botón flote y no empuje a otros elementos */
+    top: 10px;
+    left: 10px; /* Coloca el botón en la esquina superior izquierda */
+    z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+  }
+  
+  #toggle-collection-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos de la colección */
+  .pokemon-collection {
     position: absolute;
-    top: 10px; /* Ajusta según sea necesario */
-    left: 10px; /* Mantén las imágenes en la parte superior izquierda */
+    top: 10px;
+    left: -400px; /* Inicialmente fuera de la pantalla */
     display: flex;
-    gap: 10px; /* Espaciado entre las imágenes */
-}
-
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 340px;
+    height: 400px;
+    overflow: hidden;
+    transition: left 0.5s ease; /* Transición suave para el deslizamiento */
+  }
+  
+  /* Título de la colección */
+  .pokemon-collection .collection-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Botón de cierre de la colección (X) */
+  #close-collection-button {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  #close-collection-button:hover {
+    background-color: darkred;
+  }
+  
+  /* Estilos de las imágenes de Pokémon */
+  .pokemon-images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 350px;
+    overflow-y: auto;
+  }
+  
+  /* Estilo de las imágenes */
+  .pokemon-images img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efecto de hover en las imágenes */
+  .pokemon-images img:hover {
+    transform: scale(1.1);
+  }
 
 .pokeball.spin {
     animation: spin 0.3s linear;
 }
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
+
     25% {
         transform: rotate(20deg);
     }
+
     50% {
         transform: rotate(-20deg);
     }
@@ -107,12 +198,14 @@ button:hover {
     width: 50px;
     height: 50px;
     margin-bottom: 10px;
-    opacity: 0.3; /* Imagen oscura */
+    opacity: 0.3;
+    /* Imagen oscura */
     transition: opacity 0.3s ease;
 }
 
 .pokemon.light {
-    opacity: 1; /* Imagen clara */
+    opacity: 1;
+    /* Imagen clara */
 }
 
 
@@ -120,36 +213,49 @@ button:hover {
 
 .menu {
     position: fixed;
-    bottom: -250px; /* Oculto inicialmente */
-    left: 20px; /* Desplazado desde la izquierda */
-    width: 300px; /* Ancho limitado */
+    bottom: -300px;
+    /* Oculto inicialmente */
+    left: 20px;
+    /* Desplazado desde la izquierda */
+    width: 300px;
+    /* Ancho limitado */
     background-color: #333;
     color: white;
     text-align: center;
-    border-radius: 10px 10px 0 0; /* Bordes redondeados arriba */
+    border-radius: 10px 10px 0 0;
+    /* Bordes redondeados arriba */
     padding: 10px 0;
-    transition: bottom 0.3s ease; /* Animación */
+    transition: bottom 0.3s ease;
+    /* Animación */
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1; /* Aseguramos que esté detrás del botón */
+    z-index: 1;
+    /* Aseguramos que esté detrás del botón */
 }
 
 .menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    max-height: 200px; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Habilita el scroll vertical */
+    max-height: 200px;
+    /* Altura máxima del contenedor */
+    overflow-y: auto;
+    /* Habilita el scroll vertical */
 }
+
 .menu ul::-webkit-scrollbar {
-    width: 8px; /* Ancho del scroll */
+    width: 8px;
+    /* Ancho del scroll */
 }
 
 .menu ul::-webkit-scrollbar-thumb {
-    background-color: #555; /* Color de la barra */
+    background-color: #555;
+    /* Color de la barra */
     border-radius: 4px;
 }
+
 .menu ul::-webkit-scrollbar-track {
-    background-color: #222; /* Fondo del scroll */
+    background-color: #222;
+    /* Fondo del scroll */
 }
 
 .menu li {
@@ -164,21 +270,25 @@ button:hover {
 .menu-button {
     position: fixed;
     bottom: 20px;
-    left: 20px; /* Botón en la esquina inferior izquierda */
+    left: 20px;
+    /* Botón en la esquina inferior izquierda */
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 120px;
+    width: 140px;
     height: 50px;
     font-size: 15px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s ease;
 
-    text-align: center; /* Centrar el texto */
-    padding: 10px 0; /* Espaciado interno */
-    z-index: 2; /* Aseguramos que esté sobre el menú */
+    text-align: center;
+    /* Centrar el texto */
+    padding: 10px 0;
+    /* Espaciado interno */
+    z-index: 2;
+    /* Aseguramos que esté sobre el menú */
 }
 
 .menu-button:hover {
@@ -190,7 +300,7 @@ button:hover {
     background-color: #007BFF;
     color: white;
     border: none;
-    
+
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
@@ -203,33 +313,38 @@ button:hover {
 }
 
 .hidden {
-    display: none; /* Oculta elementos */
+    display: none;
+    /* Oculta elementos */
 }
 
 
 
- /* Estilo del contenedor */
- #contenedor-mensajes {
+/* Estilo del contenedor */
+#contenedor-mensajes {
     position: fixed;
-    bottom: 20px;
-    right: 10%;
-   
+    top: 20px; /* Espaciado desde la parte superior */
+    left: 20px; /* Espaciado desde la parte izquierda */
+    
     display: flex;
     flex-direction: column-reverse; /* Apila mensajes nuevos abajo */
     gap: 10px;
-    align-items: center;
-    z-index: 1000;
+    align-items: flex-start; /* Alinea los mensajes hacia la izquierda */
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
 }
 
 /* Estilo de los mensajes */
 .mensaje {
     padding: 10px 20px;
-    background-color: rgb(76, 175, 80); /* Fondo verde */
-    color: white; /* Texto blanco */
+    background-color: rgb(76, 175, 80);
+    /* Fondo verde */
+    color: white;
+    /* Texto blanco */
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* Sombra */
     font-size: 16px;
-    animation: aparecer 0.3s ease, desaparecer 0.3s ease 4.7s; /* Desaparición suave */
+    animation: aparecer 0.3s ease, desaparecer 0.3s ease 4.7s;
+    /* Desaparición suave */
 }
 
 /* Animaciones */
@@ -238,6 +353,7 @@ button:hover {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -249,6 +365,7 @@ button:hover {
         opacity: 1;
         transform: translateY(0);
     }
+
     to {
         opacity: 0;
         transform: translateY(-10px);
@@ -259,21 +376,26 @@ button:hover {
 
 .achievements {
     position: fixed;
-    bottom: 60px; /* Deja espacio para el botón en la parte inferior */
+    bottom: 60px;
+    /* Deja espacio para el botón en la parte inferior */
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
     width: 90%;
     max-width: 500px;
-    height: 150px; /* Limitar la altura */
+    height: 150px;
+    /* Limitar la altura */
     border: 2px solid #ccc;
     background-color: #f9f9f9;
     border-radius: 10px;
     text-align: left;
-    display: none; /* Ocultar inicialmente */
-    z-index: 1000; /* Por encima de otros elementos */
+    display: none;
+    /* Ocultar inicialmente */
+    z-index: 1000;
+    /* Por encima de otros elementos */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    overflow-y: auto; /* Habilitar el desplazamiento vertical */
+    overflow-y: auto;
+    /* Habilitar el desplazamiento vertical */
 }
 
 .achievements ul {
@@ -292,24 +414,30 @@ button:hover {
 }
 
 .menu-button2 {
-    position: fixed; /* Fijo en la pantalla */
-    bottom: 10px;    /* Espacio desde el borde inferior */
-    left: 50%;       /* Centrado horizontalmente */
+    position: fixed;
+    /* Fijo en la pantalla */
+    bottom: 10px;
+    /* Espacio desde el borde inferior */
+    left: 50%;
+    /* Centrado horizontalmente */
     transform: translateX(-50%);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff; /* Color azul */
+    background-color: #007bff;
+    /* Color azul */
     color: white;
     font-size: 16px;
     cursor: pointer;
-    z-index: 1000; /* Por encima de otros elementos */
+    z-index: 1000;
+    /* Por encima de otros elementos */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease;
 }
 
 .menu-button2:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    background-color: #0056b3;
+    /* Azul más oscuro al pasar el mouse */
 }
 
 
@@ -331,3 +459,57 @@ button:hover {
 #evolution-shop button:hover {
     background-color: #45a049;
 }
+
+
+.attack-button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #f0c040;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.attack-button:hover {
+    background-color: #e0a030;
+}
+
+.attack-button:active {
+    background-color: #d09020;
+}
+
+
+#attack-animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No interfiere con clics */
+    z-index: 10;
+  }
+  
+  .attack-image {
+    position: absolute;
+    bottom: 50px; /* Cerca de la Pokébola */
+    right: 550px; /* Ajusta según la posición de la Pokébola */
+    transform: scale(1) rotate(0deg); /* Inicial */
+    animation: attack-strike 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes attack-strike {
+    0% {
+      transform: scale(1) rotate(0deg); /* Sin cambio inicial */
+    }
+    50% {
+      transform: scale(1.2) rotate(-15deg); /* Agranda y rota */
+    }
+    100% {
+      transform: scale(1) rotate(0deg); /* Regresa al estado inicial */
+    }
+  }
+  
+  
