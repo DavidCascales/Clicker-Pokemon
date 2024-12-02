@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +11,13 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
-        
+
         // Al cargar la página, mostramos el parámetro 'nombre'
-        window.onload = function() {
-            const imagen = obtenerParametro('imagen') ;
-            document.getElementsByClassName('front')[0].style.backgroundImage = imagen;
+        window.onload = function () {
+            const imagen = obtenerParametro('imagen');
+            var elemento = document.getElementsByClassName('front')[0];
+
+            elemento.style.backgroundImage = `url("${imagen}")`;
         }
     </script>
     <style>
@@ -33,50 +36,66 @@
         }
 
         .container {
-            perspective: 1000px;  /* Esto define la distancia entre el observador y el objeto 3D */
+            perspective: 1000px;
+            /* Esto define la distancia entre el observador y el objeto 3D */
         }
 
         .card {
             width: 300px;
             height: 420px;
             position: relative;
-            transform-style: preserve-3d;  /* Mantiene la relación 3D */
-            transition: transform 0.6s;  /* Animación suave al girar */
+            transform-style: preserve-3d;
+            /* Mantiene la relación 3D */
+            transition: transform 0.6s;
+            /* Animación suave al girar */
         }
 
         .card:hover {
-            transform: rotateY(180deg);  /* Al hacer hover, la tarjeta gira */
+            transform: rotateY(180deg);
+            /* Al hacer hover, la tarjeta gira */
         }
 
-        .front, .back {
+        .front,
+        .back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;  /* Oculta el reverso cuando se gira */
+            backface-visibility: hidden;
+            /* Oculta el reverso cuando se gira */
             border-radius: 10px;
         }
 
-        
-
-        .back {
-            background-image: url('assets/images.jpg');  /* Imagen en el reverso */
+        .front {
+            
             background-size: cover;
             background-position: center;
-            transform: rotateY(180deg); /* Rota la parte trasera para que no sea visible al inicio */
+            background-repeat: no-repeat;
+            background-color: rgb(195, 243, 243);
+        }
+
+        .back {
+            background-image: url('assets/images.jpg');
+            /* Imagen en el reverso */
+            background-size: cover;
+            background-position: center;
+            transform: rotateY(180deg);
+            /* Rota la parte trasera para que no sea visible al inicio */
         }
     </style>
-    
+
 </head>
+
 <body>
 
-<div class="container">
-    <div class="card">
-        <div class="front"></div>
-        <div class="back"></div>
+    <div class="container">
+        <div class="card">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>
