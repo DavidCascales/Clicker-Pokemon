@@ -1,80 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Clicker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pokémon Clicker</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <div class="game-container">
+      <img src="assets/title.png" />
+      <div
+        style="
+          border: 3px solid #1003f8;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 150px;
+          padding: 5px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        "
+      >
+        <img src="assets/pokeball.png" style="width: 20px; height: 20px" />
 
-<body>
-  <div class="game-container">
-    <img src="assets/title.png">
-    <div
-      style="border: 3px solid #1003f8; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; width: 150px; padding: 5px; position: absolute; top: 10px; right: 10px;">
-      <img src="assets/pokeball.png" style="width: 20px; height: 20px;">
-
-      <span id="score" style="font-weight: bold;">0</span>
-    </div>
-
-    <div id="pokeball-container">
-      <!-- Botón para mostrar/ocultar la colección -->
-      <button id="toggle-collection-button">Mostrar Colección</button>
-      
-      <div class="pokemon-collection" id="pokemon-collection">
-        <!-- Botón para cerrar la colección -->
-        <button id="close-collection-button" class="close-btn">X</button>
-        <div class="collection-title">Colección</div>
-        <div class="pokemon-images">
-
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="pokemon dark"
-            id="pokemon1">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="pokemon dark"
-            id="pokemon2">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="pokemon dark"
-            id="pokemon3">
-          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-            class="pokemon dark" id="pokemon4">
-
-            
-            
-        </div>
+        <span id="score" style="font-weight: bold">0</span>
       </div>
-      <div class="pokeball" id="pokeball"></div>
-      <div id="attack-animation-container"></div>
+
+      <div id="pokeball-container">
+        <!-- Botón para mostrar/ocultar la colección -->
+        <button id="toggle-collection-button">Mostrar Colección</button>
+
+        <div class="pokemon-collection" id="pokemon-collection">
+          <!-- Botón para cerrar la colección -->
+          <button id="close-collection-button" class="close-btn">X</button>
+          <div class="collection-title">Colección</div>
+          <div class="pokemon-images">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+              class="pokemon dark"
+              id="pokemon1"
+            />
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+              class="pokemon dark"
+              id="pokemon2"
+            />
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
+              class="pokemon dark"
+              id="pokemon3"
+            />
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+              class="pokemon dark"
+              id="pokemon4"
+            />
+          </div>
+        </div>
+        <div class="pokeball" id="pokeball"></div>
+        <div id="attack-animation-container"></div>
+      </div>
+      <div id="shop">
+        <h2>Tienda</h2>
+        <button id="upgrade-click">
+          Mejorar clic (+1 punto por clic) - 10 puntos
+        </button>
+        <button id="auto-points">
+          Generar puntos pasivos (1 punto/seg) - 50 puntos
+        </button>
+      </div>
     </div>
+
+    <div id="menu" class="menu">
+      <button id="closeButton" class="close-button">Cerrar</button>
+      <!-- Botones para filtrar por efecto -->
+      <div id="filter-buttons">
+       
+      </div>
+      
+      <ul id="attack-list"></ul>
+    </div>
+
+    <button id="menuButton" class="menu-button">Ataques Desbloqueados</button>
+
+    <!-- Contenedor de mensajes -->
+    <div id="contenedor-mensajes"></div>
+
+    <!-- Contenedor logros -->
+    <div id="achievements" class="achievements">
+      <!-- <h3>Logros</h3> -->
+      <ul id="achievement-list">
+        <!-- Aquí se agregarán los logros desbloqueados -->
+      </ul>
+    </div>
+    <button id="toggleAchievements" class="menu-button2">
+      Mostrar/Ocultar Logros
+    </button>
     <div id="shop">
-      <h2>Tienda</h2>
-      <button id="upgrade-click">Mejorar clic (+1 punto por clic) - 10 puntos</button>
-      <button id="auto-points">Generar puntos pasivos (1 punto/seg) - 50 puntos</button>
+      <h2>Evoluciones</h2>
+      <div id="evolution-shop">
+        <!-- Botones de evolución se generarán dinámicamente -->
+      </div>
     </div>
-  </div>
-  <div id="menu" class="menu">
-    <button id="closeButton" class="close-button">Cerrar</button>
-    <ul id="attack-list">
-
-    </ul>
-  </div>
-  <button id="menuButton" class="menu-button">Ataques Desbloqueados</button>
-  <!-- Contenedor de mensajes -->
-  <div id="contenedor-mensajes"></div>
-
-  <!-- Contenedor logros -->
-  <div id="achievements" class="achievements">
-    <!-- <h3>Logros</h3> -->
-    <ul id="achievement-list">
-      <!-- Aquí se agregarán los logros desbloqueados -->
-    </ul>
-  </div>
-  <button id="toggleAchievements" class="menu-button2">Mostrar/Ocultar Logros</button>
-  <div id="shop">
-    <h2>Evoluciones</h2>
-    <div id="evolution-shop">
-      <!-- Botones de evolución se generarán dinámicamente -->
-    </div>
-  </div>
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -173,6 +173,52 @@ button:hover {
     background-color: #ffaa00;
 }
 
+/* Efecto base */
+@keyframes shake {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+  
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 10px transparent;
+    }
+    50% {
+      box-shadow: 0 0 40px var(--effect-color);
+    }
+    100% {
+      box-shadow: 0 0 10px transparent;
+    }
+  }
+  
+  /* Efectos por tipo */
+  .effect-grass {
+    --effect-color: green;
+    animation: shake 0.5s ease-in-out, glow 1s ease-in-out ;
+  }
+  
+  .effect-fire {
+    --effect-color: red;
+    animation: shake 0.5s ease-in-out, glow 1s ease-in-out ;
+  }
+  
+  .effect-water {
+    --effect-color: blue;
+    animation: shake 0.5s ease-in-out, glow 1s ease-in-out ;
+  }
+  
+  .effect-electric {
+    --effect-color: yellow;
+    animation: shake 0.5s ease-in-out, glow 1s ease-in-out infinite;
+  }
+  
 
 .pokeball {
     min-height: 25vh;
